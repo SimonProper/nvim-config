@@ -10,7 +10,7 @@ vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {})
 
 require('lualine').setup({
   options = {
-    theme = 'catppuccin-frappe'
+    theme = 'catppuccin'
   }
 })
 vim.cmd [[colorscheme catppuccin-frappe]]
