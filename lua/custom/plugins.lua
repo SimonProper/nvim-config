@@ -68,7 +68,21 @@ return function(use)
     end,
   })
 
-  -- Packer
+  -- Auto tags
+  use {
+    "windwp/nvim-ts-autotag"
+    , config = function()
+      local status, treesitter = pcall(require, 'nvim-treesitter.configs')
+      if not status then
+        return
+      end
+      treesitter.setup({
+        autotag = { enable = true }
+      })
+    end
+  }
+
+  -- Diffview
   use { 'sindrets/diffview.nvim',
     requires = 'nvim-lua/plenary.nvim' }
 
@@ -77,15 +91,12 @@ return function(use)
     defaults = { file_ignore_patterns = { "node_modules" } }
   })
 
+  -- Cattppuccin color theme
+  use { "catppuccin/nvim", as = "catppuccin" }
 
-  use { 'folke/tokyonight.nvim',
-    config = function()
-      require('lualine').setup({
-        options = {
-          theme = 'tokyonight'
-        }
-      })
-    end
-  }
-  vim.cmd [[colorscheme tokyonight-night]]
+  -- Bufferline
+  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+  -- Delete buffer
+  use {'famiu/bufdelete.nvim'}
+
 end
