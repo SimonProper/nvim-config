@@ -32,3 +32,6 @@ vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<
 -- Tab managment
 vim.keymap.set('n', '<leader>tc', ':tabc<CR>', {})
 vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {})
+
+-- lsp 
+vim.keymap.set('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
