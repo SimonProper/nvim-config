@@ -32,8 +32,7 @@ vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {})
 -- lsp
 vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
 
-vim.api.nvim_buf_create_user_command(0, 'LspDiagLine', vim.diagnostic.open_float, {})
-vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
+  vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
 
 ------------------
 -- Plugin setup --
