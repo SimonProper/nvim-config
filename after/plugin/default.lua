@@ -20,7 +20,7 @@ vim.keymap.set('n', '<leader>f', ':Format<CR>', {})
 vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {})
 
 
--- Buffer 
+-- Buffer
 vim.keymap.set('n', '<TAB>', ':bnext<CR>', {})
 vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', {})
 vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', {})
@@ -29,9 +29,11 @@ vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<
 vim.keymap.set('n', '<leader>td', ':tabc<CR>', {})
 vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {})
 
--- lsp 
-vim.keymap.set({'v', 'n'}, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
+-- lsp
+vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
 
+vim.api.nvim_buf_create_user_command(0, 'LspDiagLine', vim.diagnostic.open_float, {})
+vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
 
 ------------------
 -- Plugin setup --
@@ -47,11 +49,11 @@ vim.cmd [[colorscheme catppuccin-frappe]]
 
 vim.opt.termguicolors = true
 
--- Bufferline 
+-- Bufferline
 require("bufferline").setup({})
 
 -- Context based comments for tsx and other files
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
