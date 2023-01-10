@@ -99,4 +99,7 @@ return function(use)
   -- Delete buffer
   use {'famiu/bufdelete.nvim'}
 
+  -- Comment context
+  use {'JoosepAlviste/nvim-ts-context-commentstring'}
+
 end
