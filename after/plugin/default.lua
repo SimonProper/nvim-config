@@ -1,6 +1,17 @@
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = '80'
 
+------------------------
+-- Tab and Whitespace --
+------------------------
+vim.o.tabstop = 2
+vim.o.expandtab = true
+vim.o.shiftwidth = 2
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.smarttab = true
+vim.cmd([[set nowrap]])
+
 -----------------
 -- Keybindings --
 -----------------
