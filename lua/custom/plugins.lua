@@ -69,27 +69,12 @@ return function(use)
   })
 
   -- Auto tags
-  use {
-    "windwp/nvim-ts-autotag"
-    , config = function()
-      local status, treesitter = pcall(require, 'nvim-treesitter.configs')
-      if not status then
-        return
-      end
-      treesitter.setup({
-        autotag = { enable = true }
-      })
-    end
-  }
+  use {"windwp/nvim-ts-autotag"}
 
   -- Diffview
   use { 'sindrets/diffview.nvim',
     requires = 'nvim-lua/plenary.nvim' }
 
-  -- Telescope ignore node_modules
-  require('telescope').setup({
-    defaults = { file_ignore_patterns = { "node_modules" } }
-  })
 
   -- Cattppuccin color theme
   use { "catppuccin/nvim", as = "catppuccin" }
@@ -97,9 +82,9 @@ return function(use)
   -- Bufferline
   use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
   -- Delete buffer
-  use {'famiu/bufdelete.nvim'}
+  use { 'famiu/bufdelete.nvim' }
 
   -- Comment context
-  use {'JoosepAlviste/nvim-ts-context-commentstring'}
+  use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
 end

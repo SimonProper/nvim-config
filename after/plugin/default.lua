@@ -1,3 +1,13 @@
+--- @param plugin string
+--- @param callback fun(pluginRef : unknown )
+local prequire = function(plugin, callback)
+  local status, pluginRef = pcall(require, plugin)
+  if not status then
+    return
+  end
+  callback(pluginRef)
+end
+
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = '80'
 
@@ -43,33 +53,84 @@ vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {})
 -- lsp
 vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
 
-  vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
+vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
 
 ------------------
 -- Plugin setup --
 ------------------
 
 -- Theme
-require('lualine').setup({
-  options = {
-    theme = 'catppuccin'
-  }
-})
+prequire('lualine', function(lualine)
+  lualine.setup({
+    options = {
+      theme = 'catppuccin'
+    },
+    sections = {
+      lualine_c = {
+        {
+          'filename',
+          -- Relative path, to include the parent directory
+          path = 1,
+          -- Shortens path to leave X spaces in the window
+          -- for other components.
+          shortening_target = 40,
+        }
+      }
+    }
+  })
+end)
+
 vim.cmd [[colorscheme catppuccin-frappe]]
 
 vim.opt.termguicolors = true
 
 -- Bufferline
-require("bufferline").setup({})
+prequire('bufferline', function(bufferline)
+  bufferline.setup({
+    options = {
+      -- adds the prefix path when multiple buffers with the same name are open
+      view = 'multieview',
+      -- offsets the bufferline from NvimTree sidebar
+      offsets = {
+        {
+          filetype = "NvimTree",
+          text = "File Explorer",
+          highlight = "Directory",
+          separator = true -- use a "true" to enable the default, or set your own character
+        }
+      },
+      separator_style = 'slant',
+      diagnostics = "nvim_lsp",
+    }
+  })
+end
+)
 
 -- Context based comments for tsx and other files
-require 'nvim-treesitter.configs'.setup {
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  }
-}
+prequire('nvim-treesitter.configs', function(configs)
+  configs.setup({
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    },
+    -- nvim-ts-autotag
+    autotag = { enable = true }
+  })
+end
+)
+
 -- add the context to the comment plugin
-require('Comment').setup {
-  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-}
+prequire('Comment', function(Comment)
+  Comment.setup({
+    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  })
+end
+)
+
+-- Telescope ignore node_modules
+
+prequire('telescope', function(telescope)
+  telescope.setup({
+    defaults = { file_ignore_patterns = { "node_modules" } }
+  })
+end)
