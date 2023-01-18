@@ -84,6 +84,21 @@ vim.cmd [[colorscheme catppuccin-frappe]]
 
 vim.opt.termguicolors = true
 
+-- Nvim Tree
+prequire('nvim-tree', function (nvim_tree)
+  nvim_tree.setup({
+    view = {
+      mappings = {
+        list = {
+          { key = "h", action = "close_node" },
+          { key = "l", action = "edit" },
+        },
+      },
+    },
+  })
+end)
+
+
 -- Bufferline
 prequire('bufferline', function(bufferline)
   bufferline.setup({
@@ -128,9 +143,23 @@ end
 )
 
 -- Telescope ignore node_modules
-
 prequire('telescope', function(telescope)
   telescope.setup({
     defaults = { file_ignore_patterns = { "node_modules" } }
   })
 end)
+
+
+-- Autopairs
+prequire("nvim-autopairs", function (autopairs)
+  autopairs.setup({
+        check_ts = true, -- enable treesitter
+        ts_config = {
+          lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+          javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
+          java = false, -- don't check treesitter on java
+        },
+  })
+end)
+
+
