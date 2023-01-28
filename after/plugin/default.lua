@@ -85,7 +85,7 @@ vim.cmd [[colorscheme catppuccin-frappe]]
 vim.opt.termguicolors = true
 
 -- Nvim Tree
-prequire('nvim-tree', function (nvim_tree)
+prequire('nvim-tree', function(nvim_tree)
   nvim_tree.setup({
     hijack_cursor = true,
     view = {
@@ -135,6 +135,32 @@ prequire('nvim-treesitter.configs', function(configs)
 end
 )
 
+prequire('null-ls', function(null_ls)
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  null_ls.setup({
+    sources = {
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.rustywind
+      -- null_ls.builtins.formatting.prettierd,
+      -- null_ls.builtins.formatting.lua_format,
+    },
+    debug = true,
+    on_attach = function(client, bufnr)
+      if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+            -- vim.lsp.buf.formatting_sync()
+          end,
+        })
+      end
+    end
+  })
+end)
+
 -- add the context to the comment plugin
 prequire('Comment', function(Comment)
   Comment.setup({
@@ -152,15 +178,13 @@ end)
 
 
 -- Autopairs
-prequire("nvim-autopairs", function (autopairs)
+prequire("nvim-autopairs", function(autopairs)
   autopairs.setup({
-        check_ts = true, -- enable treesitter
-        ts_config = {
-          lua = { "string" }, -- don't add pairs in lua string treesitter nodes
-          javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
-          java = false, -- don't check treesitter on java
-        },
+    check_ts = true, -- enable treesitter
+    ts_config = {
+      lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+      javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
+      java = false, -- don't check treesitter on java
+    },
   })
 end)
-
-
