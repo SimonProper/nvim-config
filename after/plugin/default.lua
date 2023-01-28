@@ -87,6 +87,7 @@ vim.opt.termguicolors = true
 -- Nvim Tree
 prequire('nvim-tree', function (nvim_tree)
   nvim_tree.setup({
+    hijack_cursor = true,
     view = {
       mappings = {
         list = {
