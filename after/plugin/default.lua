@@ -63,7 +63,7 @@ vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
 prequire('lualine', function(lualine)
   lualine.setup({
     options = {
-      theme = 'catppuccin'
+      theme = 'sonokai'
     },
     sections = {
       lualine_c = {
@@ -80,7 +80,24 @@ prequire('lualine', function(lualine)
   })
 end)
 
-vim.cmd [[colorscheme catppuccin-frappe]]
+
+-- vim.g.sonokai_style = 'default'
+-- vim.g.sonokai_better_performance = 1
+-- vim.cmd [[colorscheme sonokai]]
+
+prequire('nordic', function(nordic)
+  nordic.setup({
+    telescope = {
+      style = 'flat',
+    }
+  }
+  )
+
+end)
+
+vim.cmd [[colorscheme nordic]]
+
+-- vim.cmd [[colorscheme catppuccin-frappe]]
 
 vim.opt.termguicolors = true
 
@@ -172,7 +189,76 @@ end
 -- Telescope ignore node_modules
 prequire('telescope', function(telescope)
   telescope.setup({
-    defaults = { file_ignore_patterns = { "node_modules" } }
+    picker = {
+      hidden = false,
+      layout_config = {
+        scroll_speed = 1,
+      },
+    },
+    defaults = {
+      file_ignore_patterns = { "node_modules" },
+      prompt_prefix = '   ',
+      selection_caret = '❯ ',
+      entry_prefix = '  ',
+      sorting_strategy = 'ascending',
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+        },
+      },
+      vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--ignore',
+        '--hidden',
+        '-g',
+        '!.git',
+      },
+      mappings = {
+        i = {
+          -- ['<ESC>'] = require('telescope.actions').close,
+          ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
+          ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
+        },
+      },
+      initial_mode = 'insert',
+      selection_strategy = 'reset',
+      layout_strategy = 'horizontal',
+      layout_config = {
+        horizontal = {
+          prompt_position = 'top',
+          preview_width = 0.55,
+          results_width = 0.8,
+        },
+        vertical = {
+          mirror = false,
+        },
+        width = 0.87,
+        height = 0.80,
+        preview_cutoff = 120,
+        scroll_speed = 1,
+      },
+      file_sorter = require('telescope.sorters').get_fuzzy_file,
+      generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+      path_display = { 'truncate' },
+      winblend = 0,
+      border = {},
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+      color_devicons = true,
+      use_less = true,
+      set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+      file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+      buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
+    }
   })
 end)
 
@@ -187,4 +273,192 @@ prequire("nvim-autopairs", function(autopairs)
       java = false, -- don't check treesitter on java
     },
   })
+end)
+
+-- Noice
+prequire('noice', function(noice)
+  noice.setup({
+    lsp = {
+      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+      bottom_search = true, -- use a classic bottom cmdline for search
+      command_palette = true, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages will be sent to a split
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = true, -- add a border to hover docs and signature help
+    },
+    cmdline = {
+      view = 'cmdline',
+    },
+    routes = {
+      {
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'written',
+        },
+        opts = { skip = true },
+      },
+    },
+    messages = {
+      -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+      -- This is a current Neovim limitation.
+      enabled = false, -- enables the Noice messages UI
+      view = 'notify', -- default view for messages
+      view_error = 'notify', -- view for errors
+      view_warn = 'notify', -- view for warnings
+      view_history = 'messages', -- view for :messages
+      view_search = 'virtualtext', -- view for search count messages. Set to `false` to disable
+    },
+    notify = {
+      enabled = false,
+    },
+
+  })
+
+  -- Dressing
+  prequire('dressing', function(dressing)
+    dressing.setup({
+      nput = {
+        -- Set to false to disable the vim.ui.input implementation
+        enabled = true,
+
+        -- Default prompt string
+        default_prompt = 'Input:',
+
+        -- Can be 'left', 'right', or 'center'
+        prompt_align = 'left',
+
+        -- When true, <Esc> will close the modal
+        insert_only = true,
+
+        -- These are passed to nvim_open_win
+        anchor = 'SW',
+        border = 'rounded',
+        -- 'editor' and 'win' will default to being centered
+        relative = 'cursor',
+
+        -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+        prefer_width = 40,
+        width = nil,
+        -- min_width and max_width can be a list of mixed types.
+        -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
+        max_width = { 140, 0.9 },
+        min_width = { 20, 0.2 },
+
+        win_options = {
+          -- Window transparency (0-100)
+          winblend = 10,
+          -- Change default highlight groups (see :help winhl)
+          winhighlight = '',
+        },
+
+        override = function(conf)
+          -- This is the config that will be passed to nvim_open_win.
+          -- Change values here to customize the layout
+          return conf
+        end,
+
+        -- see :help dressing_get_config
+        get_config = nil,
+      },
+      select = {
+        -- Set to false to disable the vim.ui.select implementation
+        enabled = true,
+
+        -- Priority list of preferred vim.select implementations
+        backend = { 'telescope', 'fzf_lua', 'fzf', 'builtin', 'nui' },
+
+        -- Trim trailing `:` from prompt
+        trim_prompt = true,
+
+        -- Options for telescope selector
+        -- These are passed into the telescope picker directly. Can be used like:
+        -- telescope = require('telescope.themes').get_ivy({...})
+        telescope = prequire('telescope.themes', function(telescope)
+        end),
+        -- Options for fzf selector
+        fzf = {
+          window = {
+            width = 0.5,
+            height = 0.4,
+          },
+        },
+
+        -- Options for fzf_lua selector
+        fzf_lua = {
+          winopts = {
+            width = 0.5,
+            height = 0.4,
+          },
+        },
+
+        -- Options for nui Menu
+        nui = {
+          position = '50%',
+          size = nil,
+          relative = 'editor',
+          border = {
+            style = 'rounded',
+            width = 0.2
+          },
+          buf_options = {
+            swapfile = false,
+            filetype = 'DressingSelect',
+          },
+          win_options = {
+            winblend = 10,
+          },
+          max_width = 80,
+          max_height = 40,
+          min_width = 40,
+          min_height = 10,
+        },
+
+        -- Options for built-in selector
+        builtin = {
+          -- These are passed to nvim_open_win
+          anchor = 'NW',
+          border = 'rounded',
+          -- 'editor' and 'win' will default to being centered
+          relative = 'editor',
+
+          win_options = {
+            -- Window transparency (0-100)
+            winblend = 10,
+            -- Change default highlight groups (see :help winhl)
+            winhighlight = '',
+          },
+          -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+          -- the min_ and max_ options can be a list of mixed types.
+          -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
+          width = nil,
+          max_width = { 140, 0.8 },
+          min_width = { 40, 0.2 },
+          height = nil,
+          max_height = 0.9,
+          min_height = { 10, 0.2 },
+
+          override = function(conf)
+            -- This is the config that will be passed to nvim_open_win.
+            -- Change values here to customize the layout
+            return conf
+          end,
+        },
+
+        -- Used to override format_item. See :help dressing-format
+        format_item_override = {},
+
+        -- see :help dressing_get_config
+        get_config = nil,
+      },
+    })
+  end)
 end)
