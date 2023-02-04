@@ -59,4 +59,6 @@ return function(use)
     'stevearc/dressing.nvim',
   }
 
+  use {'fladson/vim-kitty'}
+
 end
