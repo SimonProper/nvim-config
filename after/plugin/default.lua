@@ -169,7 +169,12 @@ prequire('null-ls', function(null_ls)
           group = augroup,
           buffer = bufnr,
           callback = function()
-            vim.lsp.buf.format({ bufnr = bufnr })
+            vim.lsp.buf.format({
+              bufnr = bufnr,
+              filter = function(client)
+                return client.name == "null-ls"
+              end
+            })
             -- vim.lsp.buf.formatting_sync()
           end,
         })
