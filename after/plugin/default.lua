@@ -97,8 +97,6 @@ end)
 
 vim.cmd [[colorscheme nordic]]
 
--- vim.cmd [[colorscheme catppuccin-frappe]]
-
 vim.opt.termguicolors = true
 
 -- Nvim Tree
@@ -293,14 +291,14 @@ prequire('noice', function(noice)
     },
     -- you can enable a preset for easier configuration
     presets = {
-      bottom_search = true, -- use a classic bottom cmdline for search
+      -- bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
     cmdline = {
-      view = 'cmdline',
+      -- view = 'cmdline',
     },
     routes = {
       {
@@ -464,4 +462,14 @@ prequire('noice', function(noice)
       },
     })
   end)
+end)
+
+-- cmp tailwind laggy fix
+prequire('nvim-cmp', function (nvim_cmp)
+  nvim_cmp.setup({
+    sources ={
+      { name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30 }
+    }
+  })
+  
 end)
