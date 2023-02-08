@@ -31,29 +31,29 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
 vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
 
 -- Nvim Tree
-vim.keymap.set('n', '<leader>ee', ':NvimTreeFocus<CR>', {})
-vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', {})
+vim.keymap.set('n', '<leader>ee', ':NvimTreeFocus<CR>', {silent= true})
+vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', {silent= true})
 
 -- Format
-vim.keymap.set('n', '<leader>f', ':Format<CR>', {})
+vim.keymap.set('n', '<leader>f', ':Format<CR>', {silent= true})
 
 -- Git diff view
-vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {})
+vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {silent= true})
 
 
 -- Buffer
-vim.keymap.set('n', '<TAB>', ':bnext<CR>', {})
-vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', {})
-vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', {})
+vim.keymap.set('n', '<TAB>', ':bnext<CR>', {silent= true})
+vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', {silent= true})
+vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', {silent= true})
 
 -- Tab managment
-vim.keymap.set('n', '<leader>td', ':tabc<CR>', {})
-vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {})
+vim.keymap.set('n', '<leader>td', ':tabc<CR>', {silent= true})
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {silent= true})
 
 -- lsp
-vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {})
+vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {silent= true})
 
-vim.keymap.set("n", 'gf', ':LspDiagLine<CR>')
+vim.keymap.set("n", 'gf', ':LspDiagLine<CR>', {silent= true})
 
 ------------------
 -- Plugin setup --
