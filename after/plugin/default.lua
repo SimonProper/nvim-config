@@ -1,4 +1,4 @@
---- @param plugin string
+-- @param plugin string
 --- @param callback fun(pluginRef : unknown )
 local prequire = function(plugin, callback)
   local status, pluginRef = pcall(require, plugin)
@@ -45,6 +45,8 @@ vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {silent= true})
 vim.keymap.set('n', '<TAB>', ':bnext<CR>', {silent= true})
 vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', {silent= true})
 vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', {silent= true})
+
+vim.keymap.set('n', '<leader>ss', ':w<CR>', {silent= true})
 
 -- Tab managment
 vim.keymap.set('n', '<leader>td', ':tabc<CR>', {silent= true})
