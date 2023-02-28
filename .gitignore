@@ -1,2 +1,2 @@
-plugin
-
+#ignores the packer output
+/plugin
