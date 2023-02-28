@@ -31,31 +31,33 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
 vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
 
 -- Nvim Tree
-vim.keymap.set('n', '<leader>ee', ':NvimTreeFocus<CR>', {silent= true})
-vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', {silent= true})
+vim.keymap.set('n', '<leader>ee', ':NvimTreeFocus<CR>', { silent = true })
+vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', { silent = true })
 
 -- Format
-vim.keymap.set('n', '<leader>f', ':Format<CR>', {silent= true})
+vim.keymap.set('n', '<leader>f', ':Format<CR>', { silent = true })
 
 -- Git diff view
-vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', {silent= true})
+vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', { silent = true })
 
 
 -- Buffer
-vim.keymap.set('n', '<TAB>', ':bnext<CR>', {silent= true})
-vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>', {silent= true})
-vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', {silent= true})
+vim.keymap.set('n', '<TAB>', ':BufferLineCycleNext<CR>', { silent = true })
+vim.keymap.set('n', '<S-TAB>', ':BufferLineCyclePrev<CR>', { silent = true })
+vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', { silent = true })
+vim.keymap.set('n', '<leader>]', ':BufferLineMoveNext<CR>', { silent = true })
+vim.keymap.set('n', '<leader>[', ':BufferLineMovePrev<CR>', { silent = true })
 
-vim.keymap.set('n', '<leader>ss', ':w<CR>', {silent= true})
+vim.keymap.set('n', '<leader>ss', ':w<CR>', { silent = true })
 
 -- Tab managment
-vim.keymap.set('n', '<leader>td', ':tabc<CR>', {silent= true})
-vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', {silent= true})
+vim.keymap.set('n', '<leader>td', ':tabc<CR>', { silent = true })
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { silent = true })
 
 -- lsp
-vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', {silent= true})
+vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { silent = true })
 
-vim.keymap.set("n", 'gf', ':LspDiagLine<CR>', {silent= true})
+vim.keymap.set("n", 'gf', ':LspDiagLine<CR>', { silent = true })
 
 ------------------
 -- Plugin setup --
@@ -94,7 +96,6 @@ prequire('nordic', function(nordic)
     }
   }
   )
-
 end)
 
 vim.cmd [[colorscheme nordic]]
@@ -325,7 +326,6 @@ prequire('noice', function(noice)
     notify = {
       enabled = false,
     },
-
   })
 
   -- Dressing
@@ -467,11 +467,30 @@ prequire('noice', function(noice)
 end)
 
 -- cmp tailwind laggy fix
-prequire('nvim-cmp', function (nvim_cmp)
+prequire('nvim-cmp', function(nvim_cmp)
   nvim_cmp.setup({
-    sources ={
-      { name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30 }
-    }
+    sources = {
+      { name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30 },
+      { name = 'path'},
+      { name = 'buffer'}
+    },
+    --[[ formatting = {
+      format = {
+        function(entry, vim_item)
+          if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
+            vim_item.menu = entry.completion_item.detail
+          else
+            vim_item.menu = ({
+                  nvim_lsp = "[LSP]",
+                  luasnip = "[Snippet]",
+                  buffer = "[Buffer]",
+                  path = "[Path]",
+                })[entry.source.name]
+            return vim_item
+          end
+        end
+      },
+    }, ]]
+
   })
-  
 end)

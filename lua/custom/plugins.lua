@@ -61,4 +61,6 @@ return function(use)
 
   use {'fladson/vim-kitty'}
 
+  use {'hrsh7th/cmp-path'}
+  use {'hrsh7th/cmp-buffer'}
 end
