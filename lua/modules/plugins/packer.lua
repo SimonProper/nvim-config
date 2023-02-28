@@ -5,6 +5,8 @@ return require('packer').startup({function(use)
     -- Package manager
     use 'wbthomason/packer.nvim'
 
+    use({ 'lewis6991/impatient.nvim' })
+
     use { -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
         requires = { -- Automatically install LSPs to stdpath for neovim
