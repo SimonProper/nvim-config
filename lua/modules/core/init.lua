@@ -1,3 +1,4 @@
+require('modules.core.settings')
 require('modules.core.mappings')
 require('modules.core.mason')
 require('modules.core.lualine')
