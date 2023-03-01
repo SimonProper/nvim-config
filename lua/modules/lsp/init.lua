@@ -94,7 +94,7 @@ end}
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local snip_status_ok, null_ls = pcall(require, 'null-ls')
+--[[ local snip_status_ok, null_ls = pcall(require, 'null-ls')
 if not snip_status_ok then
     return
 end
@@ -125,4 +125,4 @@ null_ls.setup({
             })
         end
     end
-})
+}) ]]
