@@ -55,44 +55,10 @@ cmp.setup {
         name = 'luasnip'
     } },
     window = {
-        documentation = {
-            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        },
-    },
+        completion = cmp.config.window.bordered({ border = "rounded", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }),
+        documentation = cmp.config.window.bordered({ border = "rounded", winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }), },
     experimental = {
         ghost_text = true,
         native_menu = false,
     },
 }
-
-
--- nvim_cmp.setup({
---     sources = {{
---         name = 'nvim_lsp',
---         keyword_length = 6,
---         group_index = 1,
---         max_item_count = 30
---     }, {
---         name = 'path'
---     }, {
---         name = 'buffer'
---     }}
---     --[[ formatting = {
---       format = {
---         function(entry, vim_item)
---           if entry.completion_item.detail ~= nil and entry.completion_item.detail ~= "" then
---             vim_item.menu = entry.completion_item.detail
---           else
---             vim_item.menu = ({
---                   nvim_lsp = "[LSP]",
---                   luasnip = "[Snippet]",
---                   buffer = "[Buffer]",
---                   path = "[Path]",
---                 })[entry.source.name]
---             return vim_item
---           end
---         end
---       },
---     }, ]]
---
--- })
