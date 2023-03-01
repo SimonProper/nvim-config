@@ -13,7 +13,7 @@ nordic.setup({
     },
     override = {
       NormalFloat = {
-        bg = '#191C24',
+        -- bg = '#191C24',
       },
     },
 })
