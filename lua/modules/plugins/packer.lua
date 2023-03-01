@@ -15,10 +15,13 @@ return require('packer').startup({ function(use)
             'folke/neodev.nvim' }
     }
 
+    -- Cmp
     use { -- Autocompletion
         'hrsh7th/nvim-cmp',
         requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' }
     }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-buffer' }
 
     use { -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
@@ -127,6 +130,7 @@ return require('packer').startup({ function(use)
 
     use { 'fladson/vim-kitty' }
 
-    use { 'hrsh7th/cmp-path' }
-    use { 'hrsh7th/cmp-buffer' }
+    -- Astro
+    use {'wuelnerdotexe/vim-astro'}
+
 end })
