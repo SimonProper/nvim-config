@@ -12,7 +12,7 @@ end
 
 nordic.setup({
     telescope = {
-        style = 'flat'
+        -- style = 'flat'
     },
     noice = {
         style = 'classic',
@@ -21,12 +21,14 @@ nordic.setup({
         NormalFloat = {
             -- bg = '#191C24',
         },
-        PMenuThumb = {
-            bg = nordic_palette.orange.base,
-        },
+        -- PMenuThumb = {
+        --     bg = nordic_palette.orange.base,
+        -- },
     },
 })
 
 vim.cmd [[colorscheme nordic]]
 
 vim.opt.termguicolors = true
+
+vim.api.nvim_set_hl(0, 'PMenuThumb', { bg = nordic_palette.orange.base })
