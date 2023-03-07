@@ -45,6 +45,9 @@ telescope.setup {
         ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
         ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
       },
+      n = {
+        ['d'] = 'delete_buffer'
+      }
     },
     initial_mode = 'insert',
     selection_strategy = 'reset',
