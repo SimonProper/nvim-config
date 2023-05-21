@@ -1,12 +1,13 @@
-
 local snip_status_ok, null_ls = pcall(require, 'null-ls')
 if not snip_status_ok then
     return
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 null_ls.setup({
-    sources = {null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.rustywind -- null_ls.builtins.formatting.prettierd,
-    -- null_ls.builtins.formatting.lua_format,
+    sources = {
+        null_ls.builtins.formatting.prettier,
     },
     debug = true,
     on_attach = function(client, bufnr)
@@ -25,7 +26,6 @@ null_ls.setup({
                             return client.name == "null-ls"
                         end
                     })
-                    -- vim.lsp.buf.formatting_sync()
                 end
             })
         end

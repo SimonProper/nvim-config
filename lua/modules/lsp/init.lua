@@ -46,13 +46,13 @@ local on_attach = function(_, bufnr)
     end, {
         desc = 'Format current buffer with LSP'
     })
-    -- [Custom] - Creates a command "LspDiagLine" 
+    -- [Custom] - Creates a command "LspDiagLine"
     vim.api.nvim_buf_create_user_command(bufnr, 'LspDiagLine', vim.diagnostic.open_float, {})
 end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
--- 
+--
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -63,18 +63,13 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-    -- clangd = {},
-    -- gopls = {},
-    -- pyright = {},
-    -- rust_analyzer = {},
-    tsserver = {}
-
-    -- sumneko_lua = {
-    --   Lua = {
-    --     workspace = { checkThirdParty = false },
-    --     telemetry = { enable = false },
-    --   },
-    -- },
+    tsserver = {},
+    lua_ls = {
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+        },
+    },
 }
 
 -- Ensure the servers above are installed
@@ -84,45 +79,10 @@ mason_lspconfig.setup {
     ensure_installed = vim.tbl_keys(servers)
 }
 
-mason_lspconfig.setup_handlers {function(server_name)
+mason_lspconfig.setup_handlers { function(server_name)
     require('lspconfig')[server_name].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = servers[server_name]
     }
-end}
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
---[[ local snip_status_ok, null_ls = pcall(require, 'null-ls')
-if not snip_status_ok then
-    return
-end
-
-null_ls.setup({
-    sources = {null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.rustywind -- null_ls.builtins.formatting.prettierd,
-    -- null_ls.builtins.formatting.lua_format,
-    },
-    debug = true,
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({
-                group = augroup,
-                buffer = bufnr
-            })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    vim.lsp.buf.format({
-                        bufnr = bufnr,
-                        filter = function(client)
-                            return client.name == "null-ls"
-                        end
-                    })
-                    -- vim.lsp.buf.formatting_sync()
-                end
-            })
-        end
-    end
-}) ]]
+end }
