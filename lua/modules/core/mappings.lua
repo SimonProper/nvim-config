@@ -83,5 +83,5 @@ vim.keymap.set('n', '<leader>hb', function() require('gitsigns').blame_line{full
 vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame)
 vim.keymap.set('n', '<leader>hd', require('gitsigns').diffthis)
 vim.keymap.set('n', '<leader>hD', function() require('gitsigns').diffthis('~') end)
-vim.keymap.set('n', '<leader>td', require('gitsigns').toggle_deleted)
+vim.keymap.set('n', '<leader>ht', require('gitsigns').toggle_deleted)
 
