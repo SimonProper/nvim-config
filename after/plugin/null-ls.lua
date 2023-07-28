@@ -5,10 +5,16 @@ end
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+local builtin = null_ls.builtins
+
+local sources = {
+    builtin.formatting.prettier.with({
+            extra_filetypes = { "astro" },
+        }),
+}
+
 null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.prettier,
-    },
+    sources = sources,
     debug = true,
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
