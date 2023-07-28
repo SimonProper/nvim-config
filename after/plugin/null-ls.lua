@@ -11,6 +11,7 @@ local sources = {
     builtin.formatting.prettier.with({
             extra_filetypes = { "astro" },
         }),
+    builtin.formatting.rustfmt
 }
 
 null_ls.setup({
