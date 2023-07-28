@@ -49,7 +49,7 @@ vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', { silent = true })
 vim.keymap.set('n', '<leader>f', ':Format<CR>', { silent = true })
 
 -- Git diff view
-vim.keymap.set('n', '<leader>g', ':DiffviewOpen<CR>', { silent = true })
+vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>', { silent = true })
 
 
 -- Buffer
@@ -71,17 +71,15 @@ vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { si
 vim.keymap.set("n", 'gf', ':LspDiagLine<CR>', { silent = true })
 
 --gitsigns
-vim.keymap.set('n', '<leader>hs', require('gitsigns').stage_hunk)
-vim.keymap.set('n', '<leader>hr', require('gitsigns').reset_hunk)
-vim.keymap.set('v', '<leader>hs', function() require('gitsigns').stage_hunk {vim.fn.line("."), vim.fn.line("v")} end)
-vim.keymap.set('v', '<leader>hr', function() require('gitsigns').reset_hunk {vim.fn.line("."), vim.fn.line("v")} end)
-vim.keymap.set('n', '<leader>hS', require('gitsigns').stage_buffer)
-vim.keymap.set('n', '<leader>hu', require('gitsigns').undo_stage_hunk)
-vim.keymap.set('n', '<leader>hR', require('gitsigns').reset_buffer)
-vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk)
-vim.keymap.set('n', '<leader>hb', function() require('gitsigns').blame_line{full=true} end)
+vim.keymap.set('n', '<leader>gs', require('gitsigns').stage_hunk)
+vim.keymap.set('n', '<leader>gr', require('gitsigns').reset_hunk)
+vim.keymap.set('v', '<leader>gs', function() require('gitsigns').stage_hunk {vim.fn.line("."), vim.fn.line("v")} end)
+vim.keymap.set('v', '<leader>gr', function() require('gitsigns').reset_hunk {vim.fn.line("."), vim.fn.line("v")} end)
+vim.keymap.set('n', '<leader>gS', require('gitsigns').stage_buffer)
+vim.keymap.set('n', '<leader>gu', require('gitsigns').undo_stage_hunk)
+vim.keymap.set('n', '<leader>gR', require('gitsigns').reset_buffer)
+vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk)
+vim.keymap.set('n', '<leader>gb', function() require('gitsigns').blame_line{full=true} end)
 vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame)
-vim.keymap.set('n', '<leader>hd', require('gitsigns').diffthis)
-vim.keymap.set('n', '<leader>hD', function() require('gitsigns').diffthis('~') end)
-vim.keymap.set('n', '<leader>ht', require('gitsigns').toggle_deleted)
+vim.keymap.set('n', '<leader>gt', require('gitsigns').toggle_deleted)
 
