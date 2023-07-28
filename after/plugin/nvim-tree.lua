@@ -6,7 +6,6 @@ end
 
 nvim_tree.setup({
     hijack_cursor = true,
-    open_on_setup = true,
     view = {
         mappings = {
             list = {{
@@ -19,3 +18,10 @@ nvim_tree.setup({
         }
     }
 })
+
+local function open_nvim_tree()
+  require("nvim-tree.api").tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
