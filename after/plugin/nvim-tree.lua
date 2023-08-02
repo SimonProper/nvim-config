@@ -4,22 +4,35 @@ if not ok then
     return
 end
 
+local function on_attach(bufnr)
+    local api = require('nvim-tree.api')
+
+
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+    vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close level'))
+    vim.keymap.set('n', 'l', api.node.open.edit, opts('Edit file'))
+end
+
+
 nvim_tree.setup({
     hijack_cursor = true,
-    view = {
-        mappings = {
-            list = {{
-                key = "h",
-                action = "close_node"
-            }, {
-                key = "l",
-                action = "edit"
-            }}
-        }
-    }
+    on_attach = on_attach,
 })
 
-local function open_nvim_tree()
+local function open_nvim_tree(data)
+    -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- change to the directory
+  vim.cmd.cd(data.file)
+
+  -- open the tree
   require("nvim-tree.api").tree.open()
 end
 
