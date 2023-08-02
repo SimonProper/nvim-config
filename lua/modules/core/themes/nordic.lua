@@ -42,6 +42,12 @@ nordic.setup({
         PMenuThumb = {
             bg = p.orange.base,
         },
+        MatchParen = {
+            bg = p.orange.bright
+        },
+        Visual = {
+            bg = p.gray2
+        },
     },
     reduced_blue = true,
 })
