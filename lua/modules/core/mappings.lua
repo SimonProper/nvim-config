@@ -83,3 +83,4 @@ vim.keymap.set('n', '<leader>gb', function() require('gitsigns').blame_line{full
 vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame)
 vim.keymap.set('n', '<leader>gt', require('gitsigns').toggle_deleted)
 
+vim.keymap.set('n', '<leader>sr', ':%s/', { desc = '[S]earch [R]eplace' })
