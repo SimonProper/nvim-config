@@ -8,5 +8,5 @@ else
 end
 
 require('modules.core')
-require('modules.lsp')
 require('modules.plugins')
+require('modules.lsp')
