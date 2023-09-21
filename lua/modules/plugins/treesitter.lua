@@ -7,7 +7,7 @@ end
 -- See `:help nvim-treesitter`
 treesitterConfig.setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {'lua', 'rust', 'typescript', 'tsx', 'typescript', 'json', 'help', 'css', 'html', 'javascript',
+    ensure_installed = {'lua', 'rust', 'typescript', 'tsx', 'typescript', 'json', 'vimdoc', 'css', 'html', 'javascript',
                         'markdown'},
 
     highlight = {
