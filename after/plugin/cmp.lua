@@ -46,7 +46,7 @@ cmp.setup {
         name = 'nvim_lsp',
         keyword_length = 2,
         group_index = 1,
-        max_item_count = 30
+        max_item_count = 60
     }, {
         name = 'luasnip'
     } },
