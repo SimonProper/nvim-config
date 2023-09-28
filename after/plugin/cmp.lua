@@ -9,6 +9,11 @@ if not snip_status_ok then
     return
 end
 
+local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
+if not cmp_autopairs_status_ok then
+    return
+end
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -61,3 +66,8 @@ cmp.setup {
         native_menu = false,
     },
 }
+
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
