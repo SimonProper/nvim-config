@@ -1,4 +1,4 @@
-local ok, indentBlankline = pcall(require, 'indent_blankline')
+local ok, indentBlankline = pcall(require, 'ibl')
 if not ok then
     return
 end
