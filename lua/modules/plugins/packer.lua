@@ -7,11 +7,11 @@ return require('packer').startup({ function(use)
 
     use({ 'lewis6991/impatient.nvim' })
 
-    use { -- LSP Configuration & Plugins
+    use {                                                                   -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
-        requires = { -- Automatically install LSPs to stdpath for neovim
+        requires = {                                                        -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', -- Useful status updates for LSPd
-            'j-hui/fidget.nvim', -- Additional lua configuration, makes nvim stuff amazing
+            'j-hui/fidget.nvim',                                            -- Additional lua configuration, makes nvim stuff amazing
             'folke/neodev.nvim' }
     }
 
@@ -42,10 +42,10 @@ return require('packer').startup({ function(use)
     use 'tpope/vim-rhubarb'
     use 'lewis6991/gitsigns.nvim'
 
-    use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+    use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-    use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-    use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+    use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
 
     -- Fuzzy Finder (files, lsp, etc)
     use {
@@ -69,7 +69,7 @@ return require('packer').startup({ function(use)
         "nvim-tree/nvim-tree.lua",
         requires = { "nvim-tree/nvim-web-devicons" -- optional, for file icons
         },
-        tag = "nightly" -- optional, updated every week. (see issue #1193)
+        tag = "nightly"                            -- optional, updated every week. (see issue #1193)
     })
 
     -- null-ls
@@ -83,6 +83,12 @@ return require('packer').startup({ function(use)
 
     -- Auto tags
     use { "windwp/nvim-ts-autotag" }
+
+    -- Surround
+    use {
+        "kylechui/nvim-surround",
+        tag = "*",
+    }
 
     -- Diffview
     use {
@@ -102,7 +108,7 @@ return require('packer').startup({ function(use)
     }
 
     use 'AlexvZyl/nordic.nvim'
-    use {'folke/tokyonight.nvim'}
+    use { 'folke/tokyonight.nvim' }
 
     -- Bufferline
     use {
@@ -119,7 +125,7 @@ return require('packer').startup({ function(use)
     -- Noice
     use {
         "folke/noice.nvim",
-        requires = { -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        requires = {                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim", -- OPTIONAL:
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback
@@ -131,6 +137,5 @@ return require('packer').startup({ function(use)
     use { 'fladson/vim-kitty' }
 
     -- Astro
-    use {'wuelnerdotexe/vim-astro'}
-
+    use { 'wuelnerdotexe/vim-astro' }
 end })
