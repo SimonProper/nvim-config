@@ -59,7 +59,7 @@ vim.keymap.set('n', '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<
 vim.keymap.set('n', '<leader>]', ':BufferLineMoveNext<CR>', { silent = true })
 vim.keymap.set('n', '<leader>[', ':BufferLineMovePrev<CR>', { silent = true })
 
-vim.keymap.set('n', '<leader>ss', ':w<CR>', { silent = true })
+vim.keymap.set('n', '<leader>bw', ':w<CR>', { silent = true, desc = '[B]uffer [W]rite' })
 
 -- Tab managment
 vim.keymap.set('n', '<leader>td', ':tabc<CR>', { silent = true })
