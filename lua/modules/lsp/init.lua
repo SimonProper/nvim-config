@@ -70,6 +70,20 @@ local servers = {
             telemetry = { enable = false },
         },
     },
+    tailwindcss = {
+        tailwindCSS = {
+            experimental = {
+                classRegex = {
+                    [[class:\s*'([^']*)']],
+                    [[ClassName=\s*'([^']*)']],
+                    [[ClassName=\s*"([^"]*)"]],
+                    [[className:\s*'([^']*)']],
+                    { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                    { "cx\\(([^)]*)\\)",  "(?:'|\"|`)([^']*)(?:'|\"|`)" }
+                }
+            }
+        },
+    }
 }
 
 -- Ensure the servers above are installed
