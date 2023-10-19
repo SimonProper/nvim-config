@@ -67,19 +67,21 @@ vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { silent = true })
 
 -- lsp
 vim.keymap.set({ 'v', 'n' }, '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { silent = true })
+vim.keymap.set({ 'v', 'n' }, '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>',
+  { silent = true, desc = '[C]ode [A]ction' })
 
 vim.keymap.set("n", 'gf', ':LspDiagLine<CR>', { silent = true })
 
 --gitsigns
 vim.keymap.set('n', '<leader>gs', require('gitsigns').stage_hunk)
 vim.keymap.set('n', '<leader>gr', require('gitsigns').reset_hunk)
-vim.keymap.set('v', '<leader>gs', function() require('gitsigns').stage_hunk {vim.fn.line("."), vim.fn.line("v")} end)
-vim.keymap.set('v', '<leader>gr', function() require('gitsigns').reset_hunk {vim.fn.line("."), vim.fn.line("v")} end)
+vim.keymap.set('v', '<leader>gs', function() require('gitsigns').stage_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+vim.keymap.set('v', '<leader>gr', function() require('gitsigns').reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
 vim.keymap.set('n', '<leader>gS', require('gitsigns').stage_buffer)
 vim.keymap.set('n', '<leader>gu', require('gitsigns').undo_stage_hunk)
 vim.keymap.set('n', '<leader>gR', require('gitsigns').reset_buffer)
 vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk)
-vim.keymap.set('n', '<leader>gb', function() require('gitsigns').blame_line{full=true} end)
+vim.keymap.set('n', '<leader>gb', function() require('gitsigns').blame_line { full = true } end)
 vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame)
 vim.keymap.set('n', '<leader>gt', require('gitsigns').toggle_deleted)
 
