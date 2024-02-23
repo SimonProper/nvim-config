@@ -7,4 +7,12 @@ indentBlankline.setup({
     indent = {
     char = '┊',
     },
+    scope= {
+       enabled = true,
+       show_start = true,
+       show_end = true,
+       injected_languages = false,
+       highlight = { "Function", "Label" },
+       priority = 500,
+    }
 })
