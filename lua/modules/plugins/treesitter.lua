@@ -70,13 +70,12 @@ treesitterConfig.setup {
             }
         }
     },
-    -- contextual comments
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false
-    },
     -- nvim-ts-autotag
     autotag = {
         enable = true
     }
+}
+
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
 }
