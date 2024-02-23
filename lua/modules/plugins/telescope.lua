@@ -1,17 +1,26 @@
 local ok, telescope = pcall(require, 'telescope')
 if not ok then
-    return
+  return
 end
 
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 telescope.setup {
-  picker = {
+  pickers = {
     hidden = false,
     layout_config = {
       scroll_speed = 1,
     },
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      mappings = {
+        n = {
+          ['<c-d>'] = 'delete_buffer'
+        }
+      }
+    }
   },
   defaults = {
     file_ignore_patterns = { "node_modules" },
@@ -45,9 +54,6 @@ telescope.setup {
         ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
         ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
       },
-      n = {
-        ['d'] = 'delete_buffer'
-      }
     },
     initial_mode = 'insert',
     selection_strategy = 'reset',
