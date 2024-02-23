@@ -19,6 +19,9 @@ end
 nvim_tree.setup({
     hijack_cursor = true,
     on_attach = on_attach,
+    view= {
+        adaptive_size = true
+    }
 })
 
 local function open_nvim_tree(data)
