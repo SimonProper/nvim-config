@@ -1,3 +1,7 @@
+-- [ nvim-tree ]disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Startup augroup
 local buf_en = vim.api.nvim_create_augroup('Startup', { clear = true })
 
