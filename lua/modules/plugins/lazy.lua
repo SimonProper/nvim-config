@@ -123,7 +123,11 @@ return require('lazy').setup({
     }),
 
     -- Autopairs
-    "windwp/nvim-autopairs",
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true
+    },
 
     -- Auto tags
     {
