@@ -115,7 +115,7 @@ return require('lazy').setup({
             }
         end,
     }),
-    
+
     -- null-ls
     ({
         "jose-elias-alvarez/null-ls.nvim",
@@ -138,7 +138,6 @@ return require('lazy').setup({
     -- Surround
     {
         "kylechui/nvim-surround",
-        tag = "*",
     },
 
     -- Diffview
@@ -164,7 +163,6 @@ return require('lazy').setup({
     -- Bufferline
     {
         'akinsho/bufferline.nvim',
-        tag = "v3.*",
         dependencies = 'nvim-tree/nvim-web-devicons'
     },
     -- Delete buffer
