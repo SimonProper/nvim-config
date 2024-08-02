@@ -126,7 +126,10 @@ return require('lazy').setup({
     "windwp/nvim-autopairs",
 
     -- Auto tags
-    "windwp/nvim-ts-autotag",
+    {
+        "windwp/nvim-ts-autotag",
+        lazy = false
+    },
 
     -- Surround
     {

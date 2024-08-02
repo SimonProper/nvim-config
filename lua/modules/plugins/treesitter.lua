@@ -7,15 +7,15 @@ end
 -- See `:help nvim-treesitter`
 treesitterConfig.setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {'lua', 'rust', 'typescript', 'tsx', 'typescript', 'json', 'vimdoc', 'css', 'html', 'javascript',
-                        'markdown'},
+    ensure_installed = { 'lua', 'rust', 'typescript', 'tsx', 'typescript', 'json', 'vimdoc', 'css', 'html', 'javascript',
+        'markdown' },
 
     highlight = {
         enable = true
     },
     indent = {
         enable = true,
-        disable = {'python'}
+        disable = { 'python' }
     },
     incremental_selection = {
         enable = true,
@@ -70,12 +70,8 @@ treesitterConfig.setup {
             }
         }
     },
-    -- nvim-ts-autotag
-    autotag = {
-        enable = true
-    }
 }
 
 require('ts_context_commentstring').setup {
-  enable_autocmd = false,
+    enable_autocmd = false,
 }
