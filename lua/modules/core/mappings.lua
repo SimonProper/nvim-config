@@ -49,7 +49,10 @@ vim.keymap.set('n', '<leader>et', ':NvimTreeToggle<CR>', { silent = true })
 vim.keymap.set('n', '<leader>f', ':Format<CR>', { silent = true })
 
 -- Git diff view
-vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>', { silent = true })
+-- vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>', { silent = true })
+
+-- LazyGit
+vim.keymap.set('n','<leader>gd', ':LazyGit<CR>', { silent = true } )
 
 
 -- Buffer
@@ -86,3 +89,4 @@ vim.keymap.set('n', '<leader>tb', require('gitsigns').toggle_current_line_blame)
 vim.keymap.set('n', '<leader>gt', require('gitsigns').toggle_deleted)
 
 vim.keymap.set('n', '<leader>sr', ':%s/', { desc = '[S]earch [R]eplace' })
+
