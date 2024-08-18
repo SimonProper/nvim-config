@@ -116,10 +116,10 @@ return require('lazy').setup({
         end,
     }),
 
-    -- null-ls
+    -- none-ls previously null-ls
     ({
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" }
+        "nvimtools/none-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" }
     }),
 
     -- Autopairs
