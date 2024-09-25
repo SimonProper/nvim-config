@@ -8,10 +8,11 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local builtin = null_ls.builtins
 
 local sources = {
+    builtin.formatting.biome,
     builtin.formatting.prettier.with({
             extra_filetypes = { "astro" },
         }),
-    builtin.formatting.rustfmt
+    require("none-ls.formatting.rustfmt")
 }
 
 null_ls.setup({
