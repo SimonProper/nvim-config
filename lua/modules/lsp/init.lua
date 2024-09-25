@@ -60,7 +60,7 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-    tsserver = {},
+    ts_ls = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
