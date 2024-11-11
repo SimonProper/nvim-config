@@ -209,7 +209,14 @@ return require('lazy').setup({
             "nvim-lua/plenary.nvim"
         },
         config = function()
-            require("telescope").load_extension("lazygit")
+           require("telescope").load_extension("lazygit")
         end,
     },
+
+    -- Harpoon
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" },
+    }
 })

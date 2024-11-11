@@ -52,7 +52,7 @@ vim.keymap.set('n', '<leader>f', ':Format<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>gd', ':DiffviewOpen<CR>', { silent = true })
 
 -- LazyGit
-vim.keymap.set('n','<leader>gd', ':LazyGit<CR>', { silent = true } )
+vim.keymap.set('n', '<leader>gd', ':LazyGit<CR>', { silent = true })
 
 
 -- Buffer
@@ -90,3 +90,17 @@ vim.keymap.set('n', '<leader>gt', require('gitsigns').toggle_deleted)
 
 vim.keymap.set('n', '<leader>sr', ':%s/', { desc = '[S]earch [R]eplace' })
 
+vim.keymap.set("n", "<leader>ha", function() require("harpoon"):list():add() end, { desc = '[H]arpoon [A]dd' })
+vim.keymap.set("n", "<leader>hf", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end,
+  { desc = '[H]arpoon [F]ind' })
+
+vim.keymap.set("n", "<leader>1", function() require("harpoon"):list():select(1) end,
+  { desc = 'Jump to harpoon list item [1]' })
+vim.keymap.set("n", "<leader>2", function() require("harpoon"):list():select(2) end,
+  { desc = 'Jump to harpoon list item [2]' })
+vim.keymap.set("n", "<leader>3", function() require("harpoon"):list():select(3) end,
+  { desc = 'Jump to harpoon list item [3]' })
+vim.keymap.set("n", "<leader>4", function() require("harpoon"):list():select(4) end,
+  { desc = 'Jump to harpoon list item [4]' })
+vim.keymap.set("n", "<leader>5", function() require("harpoon"):list():select(5) end,
+  { desc = 'Jump to harpoon list item [5]' })
