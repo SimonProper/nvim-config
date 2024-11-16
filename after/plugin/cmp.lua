@@ -63,11 +63,19 @@ cmp.setup {
     },
     experimental = {
         ghost_text = true,
-        native_menu = false,
     },
+    formatting = {
+        fields = { 'abbr', 'kind', 'menu' },
+        format = function(_, vim_item)
+            vim_item.menu = ""
+            vim_item.kind = ""
+            return vim_item
+        end,
+        expandable_indicator = true
+    }
 }
 
 cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
 )
