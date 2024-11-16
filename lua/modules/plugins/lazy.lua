@@ -28,15 +28,6 @@ return require('lazy').setup({
 
     { 'Bilal2453/luvit-meta', lazy = true },
 
-
-    -- {                                                                       -- LSP Configuration & Plugins
-    --     'neovim/nvim-lspconfig',
-    --     dependencies = {                                                        -- Automatically install LSPs to stdpath for neovim
-    --         'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', -- Useful status updates for LSPd
-    --         'j-hui/fidget.nvim',                                            -- Additional lua configuration, makes nvim stuff amazing
-    --         'folke/neodev.nvim' }
-    -- },
-
     {
         -- Main LSP Configuration
         'neovim/nvim-lspconfig',
@@ -209,7 +200,7 @@ return require('lazy').setup({
             "nvim-lua/plenary.nvim"
         },
         config = function()
-           require("telescope").load_extension("lazygit")
+            require("telescope").load_extension("lazygit")
         end,
     },
 
