@@ -4,12 +4,6 @@ if not ok_nordic then
     return
 end
 
-local ok_nordic_palette, p = pcall(require, 'nordic.colors')
-
-if not ok_nordic_palette then
-    return
-end
-
 nordic.setup({
     telescope = {
         style = 'classic',
@@ -17,38 +11,44 @@ nordic.setup({
     noice = {
         style = 'flat',
     },
-    override = {
-        FloatBorder = {
+    on_highlight = function(highlights, p)
+        highlights.FloatBorder = {
             bg = p.gray0,
             fg = p.white0
-        },
-        NoiceCmdlineIcon = {
+        }
+
+        highlights.NoiceCmdlineIcon = {
             bg = p.gray0,
-        },
-        NoiceCmdlineIconSearch = {
+        }
+
+        highlights.NoiceCmdlineIconSearch = {
             bg = p.gray0,
-        },
-        NoiceCmdlinePopup = {
+        }
+
+        highlights.NoiceCmdlinePopup = {
             bg = p.gray0
-        },
-        NormalFloat = {
+        }
+
+        highlights.NormalFloat = {
             bg = p.gray0,
             fg = p.white0,
-        },
-        NoicePopupBorder = {
+        }
+        highlights.NoicePopupBorder = {
             bg = p.gray0,
             fg = p.white0,
-        },
-        PMenuThumb = {
+        }
+
+        highlights.PMenuThumb = {
             bg = p.orange.base,
-        },
-        MatchParen = {
+        }
+
+        highlights.MatchParen = {
             bg = p.orange.bright
-        },
-        Visual = {
+        }
+        highlights.Visual = {
             bg = p.gray2
-        },
-    },
+        }
+    end,
     reduced_blue = true,
 })
 
