@@ -1,2 +1,5 @@
 #ignores the packer output
 /plugin
+
+# misc
+.DS_Store
