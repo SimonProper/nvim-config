@@ -38,8 +38,9 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Move and center
-vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
-vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
+-- !! Dissabled when using neoscroll
+-- vim.keymap.set('n', '<C-u>', '<C-u>zz', {})
+-- vim.keymap.set('n', '<C-d>', '<C-d>zz', {})
 
 -- Nvim Tree
 vim.keymap.set('n', '<leader>ee', ':NvimTreeFocus<CR>', { silent = true })
