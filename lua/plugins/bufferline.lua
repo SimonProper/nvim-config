@@ -22,10 +22,10 @@ return {
     },
   },
   keys = {
-    { '<TAB>', ':BufferLineCycleNext<CR>', { silent = true, mode = 'n' } },
-    { '<S-TAB>', ':BufferLineCyclePrev<CR>', { silent = true, mode = 'n' } },
-    { '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', { silent = true, mode = 'n' } },
-    { '<leader>]', ':BufferLineMoveNext<CR>', { silent = true, mode = 'n' } },
-    { '<leader>[', ':BufferLineMovePrev<CR>', { silent = true, mode = 'n' } },
+    { '<TAB>', ':BufferLineCycleNext<CR>', mode = 'n', silent = true },
+    { '<S-TAB>', ':BufferLineCyclePrev<CR>', mode = 'n', silent = true },
+    { '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', mode = 'n', silent = true },
+    { '<leader>]', ':BufferLineMoveNext<CR>', mode = 'n', silent = true },
+    { '<leader>[', ':BufferLineMovePrev<CR>', mode = 'n', silent = true },
   },
 }
