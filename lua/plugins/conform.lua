@@ -13,6 +13,9 @@ return {
         desc = '[F]ormat buffer',
       },
     },
+    -- This will provide type hinting with LuaLS
+    ---@module "conform"
+    ---@type conform.setupOpts
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -37,9 +40,19 @@ return {
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'prettier', stop_after_first = true },
-        typescriptreact = { 'prettier', stop_after_first = true },
-        typescript = { 'prettier', stop_after_first = true },
+        javascript = { 'prettier', 'biome', stop_after_first = true },
+        typescriptreact = { 'prettier', 'biome', stop_after_first = true },
+        typescript = { 'prettier', 'biome', stop_after_first = true },
+      },
+      formatters = {
+        prettier = {
+          -- only run when config is found in current working directory
+          require_cwd = true,
+        },
+        biome = {
+          -- only run when config is found in current working directory
+          require_cwd = true,
+        },
       },
     },
   },
