@@ -24,7 +24,6 @@ return {
   keys = {
     { '<TAB>', ':BufferLineCycleNext<CR>', mode = 'n', silent = true },
     { '<S-TAB>', ':BufferLineCyclePrev<CR>', mode = 'n', silent = true },
-    { '<leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>', mode = 'n', silent = true },
     { '<leader>]', ':BufferLineMoveNext<CR>', mode = 'n', silent = true },
     { '<leader>[', ':BufferLineMovePrev<CR>', mode = 'n', silent = true },
   },
