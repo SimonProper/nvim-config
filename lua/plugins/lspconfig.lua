@@ -30,7 +30,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
 
       -- better typescript lsp
-      'pmizio/typescript-tools.nvim',
+      -- 'pmizio/typescript-tools.nvim',
 
       -- Detect tabstop and shiftwidth automatically
       'tpope/vim-sleuth',
@@ -246,7 +246,7 @@ return {
         },
       }
 
-      require('typescript-tools').setup {}
+      -- require('typescript-tools').setup {}
     end,
   },
 }
