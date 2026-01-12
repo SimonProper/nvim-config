@@ -25,6 +25,19 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
   end,
 })
 
+-- Sync CWD to the directory of the first file opened
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    -- Get the path of the current buffer
+    local path = vim.fn.expand '%:p:h'
+
+    -- If it's a valid directory, set it as CWD
+    if vim.fn.isdirectory(path) == 1 then
+      pcall(vim.api.nvim_set_current_dir, path)
+    end
+  end,
+})
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)

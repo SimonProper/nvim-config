@@ -23,6 +23,7 @@ return {
         -- ['l'] = 'child_or_open',
         ['l'] = 'open',
         ['h'] = 'close_node',
+        ['<S-CR>'] = 'set_root',
       },
     },
     filesystem = {
@@ -35,6 +36,17 @@ return {
           ['\\'] = 'close_window',
         },
       },
+    },
+  },
+  event_handlers = {
+    {
+      event = 'dir_changed',
+      handler = function(args)
+        -- args.cwd is the new directory neo-tree is looking at
+        pcall(vim.api.nvim_set_current_dir, args.cwd)
+        -- Optional: notify so you know it worked
+        -- vim.notify("CWD updated to: " .. args.cwd)
+      end,
     },
   },
 }
