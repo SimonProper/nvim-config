@@ -5,6 +5,9 @@ return {
   ---@type snacks.Config
   opts = {
     bufdelete = { enabled = true },
+    lazygit = {
+      configure = false,
+    },
   },
   keys = {
     {
@@ -21,6 +24,13 @@ return {
         Snacks.bufdelete.other()
       end,
       desc = 'Delete Other Buffers',
+    },
+    {
+      '<leader>gd',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit (Snacks)',
     },
   },
 }
