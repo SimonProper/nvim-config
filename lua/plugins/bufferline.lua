@@ -6,8 +6,6 @@ return {
   opts = {
     options = {
 
-      -- adds the prefix path when multiple buffers with the same name are open
-      view = 'multieview',
       -- offsets the bufferline from NvimTree sidebar
       offsets = {
         {
