@@ -43,6 +43,8 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
           --
@@ -133,6 +135,7 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        tailwindcss = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -145,23 +148,7 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
 
         ---@type vim.lsp.Config
-        ts_ls = {
-          settings = {
-            typescript = {
-              preferences = {
-                importModuleSpecifierPreference = 'project-relative',
-              },
-            },
-            javascript = {
-              preferences = {
-                importModuleSpecifierPreference = 'project-relative',
-              },
-            },
-          },
-          init_options = {
-            hostInfo = 'janne',
-          },
-        },
+        ts_ls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -201,6 +188,8 @@ return {
         handlers = {
           function(server_name)
             local server_opts = servers[server_name] or {}
+
+            server_opts.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_opts.capabilities or {})
 
             -- 1. Use the new 0.11 API to define the config
             -- This merges your custom 'server_opts' with the defaults from nvim-lspconfig
