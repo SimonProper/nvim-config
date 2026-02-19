@@ -2,7 +2,6 @@ return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    'JoosepAlviste/nvim-ts-context-commentstring',
     { 'windwp/nvim-ts-autotag', opts = { enable = true, filetypes = { 'html', 'xml', 'tsx' } } },
   },
   build = ':TSUpdate',
