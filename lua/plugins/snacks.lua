@@ -5,11 +5,19 @@ return {
   ---@type snacks.Config
   opts = {
     bufdelete = { enabled = true },
+    profiler = { enabled = true },
     lazygit = {
       configure = false,
     },
   },
   keys = {
+    {
+      '<leader>pp',
+      function()
+        Snacks.profiler.toggle()
+      end,
+      desc = 'Toggle Profiler',
+    },
     {
       '<leader>bd',
       function()
