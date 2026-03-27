@@ -13,5 +13,5 @@ return {
     },
   },
   -- You can also add filetypes or root_markers if needed
-  -- filetypes = { "typescript", "typescriptreact" },
+  -- filetypes = { 'typescript', 'typescriptreact' },
 }

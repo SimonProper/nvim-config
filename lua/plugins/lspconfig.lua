@@ -26,9 +26,6 @@ return {
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
-      'hrsh7th/cmp-nvim-lsp',
-
       -- better typescript lsp
       -- 'pmizio/typescript-tools.nvim',
 
@@ -123,7 +120,13 @@ return {
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+
+      -- Force UTF-16 to avoid client conflicts (e.g. clangd vs ts_ls)
+      capabilities.offsetEncoding = { 'utf-16' }
+      capabilities.general = {
+        positionEncodings = { 'utf-16' },
+      }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -148,7 +151,32 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
 
         ---@type vim.lsp.Config
-        ts_ls = {},
+        -- ts_ls = {},
+        vtsls = {
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              tsserver = {
+                maxTsServerMemory = 8192,
+              },
+            },
+          },
+          handlers = {
+            ['workspace/executeCommand'] = function(err, result, ctx, config)
+              if ctx.params and ctx.params.command == 'setContext' then
+                return {}
+              end
+              return vim.lsp.handlers['workspace/executeCommand'](err, result, ctx, config)
+            end,
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
