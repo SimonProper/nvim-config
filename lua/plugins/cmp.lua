@@ -35,11 +35,15 @@ return {
       },
       completion = {
         accept = {
+          -- Disabled: no context awareness for callback positions,
+          -- e.g. onClick={handleClick} becomes onClick={handleClick()}
           auto_brackets = {
-            enabled = true,
+            enabled = false,
           },
         },
         menu = {
+          border = 'rounded',
+          winhighlight = 'Normal:NoiceCmdlinePopup,FloatBorder:NoiceCmdlinePopupBorder,CursorLine:NoicePopupmenuSelected,Search:None',
           draw = {
             treesitter = { 'lsp' },
           },
@@ -64,35 +68,6 @@ return {
           menu = {
             auto_show = function()
               return vim.fn.getcmdtype() == ':'
-            end,
-            min_width = 60,
-            max_height = 12,
-            border = 'rounded',
-            winhighlight = table.concat({
-              'Normal:NoiceCmdlinePopup',
-              'FloatBorder:NoiceCmdlinePopupBorder',
-              'CursorLine:NoicePopupmenuSelected',
-              'Search:None',
-            }, ','),
-            scrollbar = false,
-            direction_priority = function()
-              local pos = vim.g.ui_cmdline_pos
-              if pos and pos[1] then
-                local middle = math.floor(vim.o.lines / 2)
-                if pos[1] <= middle then
-                  return { 's', 'n' }
-                end
-                return { 'n', 's' }
-              end
-              return { 's', 'n' }
-            end,
-            cmdline_position = function()
-              local pos = vim.g.ui_cmdline_pos
-              if pos and pos[1] then
-                return { pos[1] - 1, pos[2] }
-              end
-              local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
-              return { vim.o.lines - height, 0 }
             end,
           },
           ghost_text = { enabled = true },
