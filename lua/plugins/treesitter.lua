@@ -2,10 +2,9 @@ return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
-    { 'windwp/nvim-ts-autotag', opts = { enable = true, filetypes = { 'html', 'xml', 'tsx' } } },
+    { 'windwp/nvim-ts-autotag', opts = { enable = true, filetypes = { 'html', 'xml', 'tsx', 'svelte' } } },
   },
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
@@ -18,6 +17,7 @@ return {
       'vimdoc',
       'css',
       'html',
+      'svelte',
       'javascript',
       'markdown',
       'bash',
@@ -39,59 +39,24 @@ return {
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'python' } },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = '<c-space>',
-        node_incremental = '<c-space>',
-        scope_incremental = '<c-s>',
-        node_decremental = '<c-backspace>',
-      },
-    },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ['aa'] = '@parameter.outer',
-          ['ia'] = '@parameter.inner',
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['ac'] = '@class.outer',
-          ['ic'] = '@class.inner',
-        },
-      },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          [']m'] = '@function.outer',
-          [']]'] = '@class.outer',
-        },
-        goto_next_end = {
-          [']M'] = '@function.outer',
-          [']['] = '@class.outer',
-        },
-        goto_previous_start = {
-          ['[m'] = '@function.outer',
-          ['[['] = '@class.outer',
-        },
-        goto_previous_end = {
-          ['[M'] = '@function.outer',
-          ['[]'] = '@class.outer',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
-        },
-      },
-    },
   },
+  config = function(_, opts)
+    require('nvim-treesitter.config').setup(opts)
+
+    -- Incremental selection using native Neovim 0.12 treesitter API
+    local select = require('vim.treesitter._select')
+
+    vim.keymap.set('n', '<C-space>', function()
+      select.select_parent(1)
+    end, { desc = 'Init treesitter selection' })
+
+    vim.keymap.set('x', '<C-space>', function()
+      select.select_parent(vim.v.count1)
+    end, { desc = 'Expand treesitter selection' })
+
+    vim.keymap.set('x', '<C-backspace>', function()
+      select.select_child(vim.v.count1)
+    end, { desc = 'Shrink treesitter selection' })
+  end,
 }
 -- vim: ts=2 sts=2 sw=2 et
