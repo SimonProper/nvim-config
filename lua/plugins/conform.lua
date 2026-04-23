@@ -47,7 +47,6 @@ return {
           lsp_format_opt = 'fallback'
         end
         return {
-          async = true,
           timeout_ms = 2500,
           lsp_format = lsp_format_opt,
         }
