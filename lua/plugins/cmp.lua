@@ -88,6 +88,22 @@ return {
             opts = {
               tailwind_color_icon = '',
             },
+            -- Deprioritize Node.js built-in completions so framework-specific
+            -- exports (e.g. svelte/events) rank higher in autocomplete
+            transform_items = function(_, items)
+              local find = string.find
+              for i = 1, #items do
+                local item = items[i]
+                local ld = item.labelDetails
+                if ld then
+                  local desc = ld.description
+                  if desc and find(desc, 'node:', 1, true) then
+                    item.score_offset = (item.score_offset or 0) - 5
+                  end
+                end
+              end
+              return items
+            end,
           },
           lazydev = {
             name = 'LazyDev',
