@@ -53,4 +53,30 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Move focus to the upper window', silent = true })
 
+-- [[ Quickfix navigation ]]
+--  Telescope sends <Tab>-marked entries here via <C-q>
+--  Wrapped in a fn so a count works: 3]q jumps forward 3 items
+vim.keymap.set('n', ']q', function()
+  vim.cmd(vim.v.count1 .. 'cnext')
+  vim.cmd 'normal! zz'
+end, { desc = 'Next quickfix item' })
+vim.keymap.set('n', '[q', function()
+  vim.cmd(vim.v.count1 .. 'cprev')
+  vim.cmd 'normal! zz'
+end, { desc = 'Prev quickfix item' })
+vim.keymap.set('n', '<leader>xq', '<cmd>copen<CR>', { desc = 'Open quickfix list' })
+vim.keymap.set('n', '<leader>xc', '<cmd>cclose<CR><cmd>lclose<CR>', { desc = 'Close quickfix + location list' })
+
+-- [[ Location list navigation ]]
+--  Window-local list. Filled by <leader>q (diagnostics), :lvimgrep, :lgrep
+vim.keymap.set('n', ']l', function()
+  vim.cmd(vim.v.count1 .. 'lnext')
+  vim.cmd 'normal! zz'
+end, { desc = 'Next loclist item' })
+vim.keymap.set('n', '[l', function()
+  vim.cmd(vim.v.count1 .. 'lprev')
+  vim.cmd 'normal! zz'
+end, { desc = 'Prev loclist item' })
+vim.keymap.set('n', '<leader>xl', '<cmd>lopen<CR>', { desc = 'Open location list' })
+
 -- vim: ts=2 sts=2 sw=2 et

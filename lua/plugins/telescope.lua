@@ -34,6 +34,27 @@ return {
       },
     },
     config = function()
+      local actions = require 'telescope.actions'
+      local action_state = require 'telescope.actions.state'
+
+      -- Open every <Tab>-marked entry. Falls back to normal open when nothing marked.
+      local function open_marked(prompt_bufnr)
+        local marked = action_state.get_current_picker(prompt_bufnr):get_multi_selection()
+        if vim.tbl_isempty(marked) then
+          return actions.select_default(prompt_bufnr)
+        end
+        actions.close(prompt_bufnr)
+        for _, entry in ipairs(marked) do
+          local path = entry.path or entry.filename or entry.value
+          if path then
+            vim.cmd('edit ' .. vim.fn.fnameescape(path))
+            if entry.lnum then
+              vim.api.nvim_win_set_cursor(0, { entry.lnum, (entry.col or 1) - 1 })
+            end
+          end
+        end
+      end
+
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -81,8 +102,17 @@ return {
           mappings = {
             i = {
               -- ['<ESC>'] = require('telescope.actions').close,
-              ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
-              ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
+              ['<C-u>'] = actions.preview_scrolling_up,
+              ['<C-d>'] = actions.preview_scrolling_down,
+              -- <Tab>/<S-Tab> mark entries; these consume the marks
+              ['<C-o>'] = open_marked,
+              ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
+              ['<C-a>'] = actions.send_to_qflist + actions.open_qflist,
+            },
+            n = {
+              ['<C-o>'] = open_marked,
+              ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
+              ['<C-a>'] = actions.send_to_qflist + actions.open_qflist,
             },
           },
           initial_mode = 'insert',
