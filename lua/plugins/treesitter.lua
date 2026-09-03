@@ -1,47 +1,53 @@
+-- Highlight, edit, and navigate code.
+-- NOTE: the `main` branch is a full rewrite; `setup()` only takes `install_dir`.
+-- Parsers are installed explicitly and highlighting is started per-buffer.
 return {
-  -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  branch = 'main',
+  lazy = false,
+  build = ':TSUpdate',
   dependencies = {
     { 'windwp/nvim-ts-autotag', opts = { enable = true, filetypes = { 'html', 'xml', 'tsx', 'svelte' } } },
   },
-  build = ':TSUpdate',
-  -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-  opts = {
-    ensure_installed = {
-      'lua',
-      'rust',
-      'typescript',
-      'tsx',
-      'typescript',
-      'json',
-      'vimdoc',
-      'css',
-      'html',
-      'svelte',
-      'javascript',
-      'markdown',
+  config = function()
+    local Parsers = {
       'bash',
+      'css',
       'diff',
+      'html',
+      'javascript',
+      'json',
+      'lua',
       'luadoc',
+      'markdown',
       'markdown_inline',
       'query',
+      'rust',
+      'svelte',
+      'tsx',
+      'typescript',
       'vim',
       'vimdoc',
-    },
-    -- Autoinstall languages that are not installed
-    auto_install = true,
+    }
 
-    highlight = {
-      enable = true,
-      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-      --  If you are experiencing weird indenting issues, add the language to
-      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-      additional_vim_regex_highlighting = { 'ruby' },
-    },
-    indent = { enable = true, disable = { 'python' } },
-  },
-  config = function(_, opts)
-    require('nvim-treesitter.config').setup(opts)
+    require('nvim-treesitter').install(Parsers)
+
+    vim.api.nvim_create_autocmd('FileType', {
+      desc = 'Start treesitter highlighting and indentation',
+      callback = function(ev)
+        local lang = vim.treesitter.language.get_lang(ev.match)
+        if not lang then return end
+        local ok, added = pcall(vim.treesitter.language.add, lang)
+        if not ok or not added then return end
+
+        vim.treesitter.start(ev.buf, lang)
+
+        -- Treesitter indentation is experimental; python indents better without it.
+        if ev.match ~= 'python' then
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
 
     -- Incremental selection using native Neovim 0.12 treesitter API
     local select = require('vim.treesitter._select')
